@@ -1,40 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>APK Upload</title>
-</head>
-<body>
-    <h1>APK Upload</h1>
-    <form method="POST" enctype="multipart/form-data" id="upload-form">
-        <input type="file" name="file">
-        <input type="submit" value="Upload">
+<!doctype html>
+<html>
+  <head>
+    <title>上传APK数据文件</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+      }
+      h1 {
+        text-align: center;
+        color: #333333;
+        margin-top: 50px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      input[type="file"] {
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+        background-color: #ffffff;
+        color: #333333;
+      }
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+      .error {
+        color: red;
+        margin-top: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>上传APK文件并预测风险</h1>
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+      <label for="file">请选择CSV文件:</label>
+      <input type="file" name="file" id="file">
+      <br>
+      <input type="submit" value="预测">
     </form>
-
-    <div id="filename"></div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#upload-form').submit(function(event) {
-                event.preventDefault();
-                var formData = new FormData(this);
-
-                $.ajax({
-                    url: '/upload',
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(data) {
-                        $('#filename').html(data.filename);
-                    },
-                    error: function(xhr, status, error) {
-                        alert(xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script>
-</body>
+  </body>
 </html>

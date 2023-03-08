@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Prediction Result</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+      }
+      h1 {
+        text-align: center;
+        color: #333333;
+        margin-top: 50px;
+      }
+      h2 {
+        margin-top: 30px;
+        margin-bottom: 10px;
+        font-weight: normal;
+      }
+      table {
+        margin: 0 auto;
+        max-width: 800px;
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+        background-color: #ffffff;
+      }
+      th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #dddddd;
+
+
+      }
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>预测结果</h1>
+    {% for table in tables %}
+      <div style="overflow-x:auto;">
+        <table>
+          {{ table|safe }}
+        </table>
+      </div>
+    {% endfor %}
+  </body>
+</html>
